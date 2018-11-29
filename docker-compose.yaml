@@ -1,0 +1,14 @@
+version: '3'
+services:
+  zap:
+    build: 
+      context: .
+    environment:
+      SCREEN_WIDTH: 1440
+      SCREEN_HEIGHT: 900
+      PYTHONBUFFERED: 1
+    ports:
+      - 8090:8090
+    command: ./recorder.sh
+    volumes:
+      - ./output:/zap/output
