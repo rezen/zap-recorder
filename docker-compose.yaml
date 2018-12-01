@@ -1,6 +1,12 @@
 version: '3'
 services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    ports:
+      - 3000:3000
   zap-gui:
+    depends_on:
+      - juice-shop
     build: 
       context: .
     environment:
@@ -14,3 +20,4 @@ services:
     command: ./recorder.sh
     volumes:
       - ./output:/zap/output
+  

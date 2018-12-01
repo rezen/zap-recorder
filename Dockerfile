@@ -4,8 +4,9 @@ USER root
 # Everything GUI related should be added here
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive  apt-get install -y ubuntu-ui-toolkit-theme ubuntu-artwork \
-    light-themes ubuntu-mono x11-xserver-utils wmctrl dbus dbus-x11 xdotool \
+    light-themes ubuntu-mono x11-xserver-utils wmctrl dbus dbus-x11 xdotool ttf-mscorefonts-installer  \
     x11vnc xorg gnome-core gnome-panel gnome-settings-daemon gnome-terminal --no-install-recommends && \
+    fc-cache -f -v && \
     apt-get clean && \
     apt-get purge -y tracker* usb* account* mobile* printer*  remmina* telepathy-*  wireless* signon* && \
     apt autoremove -y && \

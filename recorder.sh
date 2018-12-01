@@ -47,6 +47,15 @@ sleep 1
 kill -INT $VID
 sleep 5
 
+# Convert video to gif
+# https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
+# https://medium.com/@colten_jackson/doing-the-gif-thing-on-debian-82b9760a8483
+# -ss=seek, -t=duration
+ffmpeg -vsync 0 -t 1.3 -i output/clip.mp4 -vf fps=15,scale=320:-1:flags=lanczos,palettegen /tmp/palette.png
+# Speed of GIF playback is increased
+ffmpeg -y  -i output/clip.mp4  -i /tmp/palette.png -r 10 -t 10 -filter_complex "setpts=0.6*PTS,scale=900:-1:flags=lanczos[x];[x][1:v]paletteuse" output/clip.gif
+sleep 1
+
 gnome-session-quit
 
 # Shutdown xvfb

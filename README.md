@@ -1,5 +1,9 @@
 # ZAP Recorder
-Generate videos/gifs of ZAP GUI interactions . Run `docker-compose up --build` and wait for an mp4 in output!
+Generate videos/gifs of ZAP GUI interactions . Run `docker-compose up --build --abort-on-container-exit` and wait for an mp4 in output!
+
+## Sample
+![Example](output/clip.gif)
+
 
 ## Todo
 - Improve logging handling

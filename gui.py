@@ -5,11 +5,8 @@ import pyautogui
 from subprocess import call
 from wmctrl import Window
 
-print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 zap_main = Window.by_class('sun-awt-X11-XFramePeer.OWASP')[0]
-print(zap_main)
 zap_main.set_properties(['add','maximized_vert','maximized_horz'])
-
 
 pyautogui.screenshot('output/shot.png')
 
@@ -25,16 +22,21 @@ currentMouseX, currentMouseY = pyautogui.position()
 
 
 # Quick launch
-pyautogui.moveTo(910, 78, duration=0.8)
+pyautogui.moveTo(910, 78, duration=0.6)
 pyautogui.click()
+time.sleep(4)
+pyautogui.hotkey('esc')
+pyautogui.hotkey('ctrl', 'l')
+pyautogui.typewrite('http://juice-shop:3000')
+pyautogui.hotkey('enter')
 time.sleep(6)
+
 zap_main.activate()
 # What is hotkey to minimize window?
 # pyautogui.hotkey('alt', 'f9')
 # https://bitbucket.org/antocuni/wmctrl/src/
 # firefox = Window.get_active()
 # firefox.set_properties("remove,maximized_horz,maximized_vert")
-
 # call(['xdotool', 'getactivewindow', 'windowminimize'])
 
 # Click options
