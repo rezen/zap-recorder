@@ -5,7 +5,12 @@ import pyautogui
 from subprocess import call
 from wmctrl import Window
 
-zap_main = Window.by_class('sun-awt-X11-XFramePeer.OWASP')[0]
+for win in Window.list():
+	print(win)
+
+# For ubuntu 16
+# zap_main = Window.by_class('sun-awt-X11-XFramePeer.OWASP')[0]
+zap_main = Window.by_class('OWASP')[0]
 zap_main.set_properties(['add','maximized_vert','maximized_horz'])
 
 pyautogui.screenshot('output/shot.png')
@@ -22,7 +27,7 @@ currentMouseX, currentMouseY = pyautogui.position()
 
 
 # Quick launch
-pyautogui.moveTo(910, 78, duration=0.6)
+pyautogui.moveTo(890, 94, duration=0.6)
 pyautogui.click()
 time.sleep(4)
 pyautogui.hotkey('esc')
@@ -40,7 +45,7 @@ zap_main.activate()
 # call(['xdotool', 'getactivewindow', 'windowminimize'])
 
 # Click options
-pyautogui.moveTo(270, 78, duration=0.8)
+pyautogui.moveTo(250, 94, duration=0.8)
 pyautogui.click()
 for i in range(0, 23):
     pyautogui.hotkey('down')

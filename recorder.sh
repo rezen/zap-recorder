@@ -1,9 +1,6 @@
 #!/bin/sh
 
 HERE="$PWD"
-mkdir -p $HOME/.config/nautilus
-chown -R zap:zap /home/zap
-
 export DISPLAY=:1.0
 export XKL_XMODMAP_DISABLE=1
 
@@ -13,14 +10,16 @@ then
   Xvfb :1 -ac -screen 0 1440x900x24  +extension RANDR &
 fi
 
+mkdir -p /usr/share/unity/indicators
+
 # Start window manager
 # @todo log to specific file
 gnome-session &
 gnome-panel &
-gnome-settings-daemon &
 metacity &
-nautilus &
+sleep 1
 xhost +
+sleep 1
 
 # @todo adjust logging
 su - zap -c "/zap/zap.sh -addonupdate -config start.installAddonUpdates=true -config quickstart.launch.defaultBrowser=Firefox -config start.checkForUpdates=true -config database.newsessionprompt=false -config view.uiWmHandling=1 -config start.checkAddonUpdates=true &"
@@ -34,7 +33,7 @@ wmctrl -ir $(wmctrl -l | grep ZAP | cut -d' ' -f1)  -b add,maximized_vert,maximi
 sleep 1
 
 # Start recording
-ffmpeg -y -r 30 -s 1440x900 -f x11grab -i :1 -g 600 -vcodec libx264 output/clip.mp4 &
+ffmpeg -y -probesize 20M -r 30 -s 1440x900 -f x11grab -i :1 -g 600 -vcodec libx264 output/clip.mp4 &
 VID=$!
 
 # Start GUI interactions
