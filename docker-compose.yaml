@@ -1,6 +1,6 @@
 version: '3'
 services:
-  zap:
+  zap-gui:
     build: 
       context: .
     environment:
@@ -9,6 +9,8 @@ services:
       PYTHONBUFFERED: 1
     ports:
       - 8090:8090
+    extra_hosts:
+      - "zap:127.0.0.1"
     command: ./recorder.sh
     volumes:
       - ./output:/zap/output
